@@ -14,7 +14,6 @@
             clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0% 50%);
         }
     </style>
-
 </head>
 
 <body style="background-color: black;">
@@ -54,8 +53,8 @@
         console.log(curr);
 
         let myAnimal = animals.slice(curr, Math.ceil(Math.random() * 3));
-        myAnimal.toggleClass("closed");
-        setTimeout(function () {
+        myAnimal.toggleClass("closed"); // Add closed css attribute
+        setTimeout(function () { // remove it 1 second later. This could also be done with the transition end event
             myAnimal.toggleClass("closed");
         }, 1000);
 

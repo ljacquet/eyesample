@@ -1,33 +1,66 @@
 <html>
-    <head>
-        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.js"></script>
-        <style>
-            .eyes {
-                transition: clip-path 1s;
-                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-                height: 50px;
-                align-self: center;
-            }
 
-            .closed {
-                clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0% 50%);
-            }
-        </style>
-        
-    </head>
-    <body style="background-color: black;">
-        <div style="display: flex; height: 100%; justify-content: space-evenly;">
-            <img src="eyes_test.jpg" class="eyes">
-            <img src="owl.jpg" class="eyes">
-            <img src="deer.jpg" class="eyes">
-        </div>
-    </body>
-    <script>
-        setInterval(function () {
-            $(".eyes").toggleClass("closed");
-            setTimeout(function () {
-                $(".eyes").toggleClass("closed");
-            }, 1000)
-        }, 5000)
-    </script>
+<head>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.js"></script>
+    <style>
+        .eyes {
+            transition: clip-path 1s;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            height: 50px;
+            align-self: center;
+        }
+
+        .closed {
+            clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0% 50%);
+        }
+    </style>
+
+</head>
+
+<body style="background-color: black;">
+    <div style="display: flex; height: 100%; justify-content: space-evenly;">
+        <img src="eyes_test.jpg" class="eyes">
+        <img src="owl.jpg" class="eyes">
+        <img src="deer.jpg" class="eyes">
+    </div>
+</body>
+<script>
+    // Kinda sloppy random eye blinking. Probably a better way to do this but this is for demonstration purposes
+
+    function shuffle(array) {
+        var m = array.length, t, i;
+
+        // While there remain elements to shuffle…
+        while (m) {
+
+            // Pick a remaining element…
+            i = Math.floor(Math.random() * m--);
+
+            // And swap it with the current element.
+            t = array[m];
+            array[m] = array[i];
+            array[i] = t;
+        }
+
+        return array;
+    }
+    let animals = shuffle($(".eyes"));
+    let curr = 0;
+
+    setInterval(function () {
+        if (curr >= animals.length) {
+            curr = 0;
+        }
+        console.log(curr);
+
+        let myAnimal = animals.slice(curr, Math.ceil(Math.random() * 3));
+        myAnimal.toggleClass("closed");
+        setTimeout(function () {
+            myAnimal.toggleClass("closed");
+        }, 1000);
+
+        curr++;
+    }, 2000)
+</script>
+
 </html>
